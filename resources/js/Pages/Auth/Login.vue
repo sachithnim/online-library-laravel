@@ -6,6 +6,7 @@ import TextLink from '@/Components/TextLink.vue';
 import InputField from '@/Components/InputField.vue';
 import PrimaryBtn from '@/Components/PrimaryBtn.vue';
 import ErrorMessages from '@/Components/ErrorMessages.vue';
+import CheckBox from '@/Components/CheckBox.vue';
 import { useForm } from '@inertiajs/vue3';
 
 
@@ -46,10 +47,12 @@ const submit = () => {
                         <InputField label="Password" type="password" icon="key" v-model="form.password"/>
 
 
-                        <div >
+                        <div class="flex items-center justify-between">
 
+                            <CheckBox name="remember" v-model="form.remember">Remember me</CheckBox>
+                            <TextLink routeName="home" label="Forgot Password?" />
                         </div>
-                    
+
                         <PrimaryBtn :disabled="form.processing">Login</PrimaryBtn>
 
                 </form>
