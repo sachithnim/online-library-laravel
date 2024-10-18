@@ -33,7 +33,7 @@ const submit = () => {
                         <Title> Login to your account</Title>
                         <p>
                                 Need an account? 
-                                <TextLink routeName="login" label="Register"/>
+                                <TextLink routeName="register" label="Register"/>
                         </p>
                 </div>
 
