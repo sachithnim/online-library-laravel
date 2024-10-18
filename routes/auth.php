@@ -6,7 +6,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use Egulias\EmailValidator\EmailValidator;
 use App\Http\Controllers\Auth\EmailValidatorController;
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Symfony\Component\Mime\Email;
 
 Route::middleware('guest')->group(function () {
@@ -18,6 +20,18 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login', [AuthenticateController::class, 'create'])->name('login');
     Route::post('/login', [AuthenticateController::class, 'store']);
+
+    // ------------------- Reset Password ------------------- //
+
+    Route::get('/forgot-password', [ResetPasswordController::class, 'requestPass'])->name('password.request');
+
+
+    Route::post('/forgot-password', [ResetPasswordController::class, 'sendEmail'])->name('password.email');
+
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'resetForm'])->name('password.reset');
+
+    Route::post('/reset-password', [ResetPasswordController::class, ('resetHandler')])->name('password.update');
+    
 });
 
 
