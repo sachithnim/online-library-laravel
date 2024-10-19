@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BookListingController;
+use App\Models\BookListing;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -20,6 +22,8 @@ Route::middleware('auth')->group(function() {
 
 });
 
-Route::inertia('/', 'Home')->name('home');
+
+Route::get('/', [BookListingController::class, 'index'])->name('home');
+Route::resource('listing', BookListingController::class);
 
 require __DIR__.'/auth.php';
