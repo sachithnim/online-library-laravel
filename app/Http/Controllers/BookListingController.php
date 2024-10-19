@@ -6,19 +6,28 @@ use App\Models\BookListing;
 use App\Http\Requests\StoreBookListingRequest;
 use App\Http\Requests\UpdateBookListingRequest;
 use Inertia\Inertia;
+use App\Models\User;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Http\Request;
 
 class BookListingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        
 
-        $bookListings = BookListing::with('user')->latest()->paginate(6);
+        $bookListings = BookListing::with('user')
+            ->filter(request(['search']))
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
 
         return Inertia::render('Home', [
-            'bookListings' => $bookListings
+            'bookListings' => $bookListings,
+            'searchTerm' => $request->search,
         ]);
     }
 
