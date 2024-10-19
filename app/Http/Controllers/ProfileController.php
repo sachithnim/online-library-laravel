@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class ProfileController extends Controller
@@ -35,6 +36,19 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return redirect()->route('profile.edit');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $fields = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
         
+        $request->user()->update([
+            'password' => Hash::make($fields['password']),
+        ]);
+        
+        return redirect()->route('profile.edit');
     }
 }
