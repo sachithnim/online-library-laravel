@@ -36,5 +36,9 @@ class BookListing extends Model
         if ($filters['user_id'] ?? false) {
             $query->where('user_id', request('user_id'));
         }
+
+        if($filters['type'] ?? false) {
+            $query->where('type', 'like', '%' . request('type') . '%');
+        }
     }
 }

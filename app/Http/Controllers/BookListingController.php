@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBookListingRequest;
 use App\Http\Requests\UpdateBookListingRequest;
 use Inertia\Inertia;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,12 @@ class BookListingController extends Controller
     {
         
 
-        $bookListings = BookListing::with('user')
-            ->filter(request(['search', 'user_id']))
+        $bookListings = BookListing::whereHas('user', function(Builder $query) {
+            $query->where('role', '!=', 'suspended');
+        })
+            ->with('user')
+            ->where('approved', true)
+            ->filter(request(['search', 'user_id', 'type']))
             ->latest()
             ->paginate(6)
             ->withQueryString();

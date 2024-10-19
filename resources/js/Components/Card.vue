@@ -12,8 +12,19 @@ const selectUser = (id) => {
     router.get(route("home"), {
         user_id: id,
         search: params.search,
+        type: params.type,
     });
 };
+
+const selectType = (type) => {
+    router.get(route("home"), {
+        user_id: params.user_id,
+        search: params.search,
+        type: type,
+    });
+};
+
+
 </script>
 
 <template>
@@ -41,8 +52,11 @@ const selectUser = (id) => {
                         {{ bookListing.user.name }}
                     </button>
                 </p>
-
-                <p>Genre / type : {{ bookListing.type }}</p>
+                
+                <p>Genre / type :
+                    <button class="text-link" @click="selectType(bookListing.type)">{{ bookListing.type }}</button>
+                </p>
+                <!-- <button @click="selectType(type)">Genre / type : {{ bookListing.type }}</button> -->
             </div>
         </div>
     </div>
