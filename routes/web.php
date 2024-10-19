@@ -16,6 +16,8 @@ Route::middleware('auth')->group(function() {
 
     Route::put('/profile', [ProfileController::class, 'updatePassword'])->name('profile.password');
 
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 Route::inertia('/', 'Home')->name('home');
