@@ -27,10 +27,14 @@ class BookListing extends Model
     public function scopeFilter($query, array $filters)
     {
         if ($filters['search'] ?? false) {
-            $query
-                ->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('description', 'like', '%' . request('search') . '%')
-                ->orWhere('type', 'like', '%' . request('search') . '%');
+                $query->where(function ($q) {
+                    $q->where('title', 'like', '%' . request('search') . '%')
+                    ->orWhere('description', 'like', '%' . request('search') . '%')
+                    ->orWhere('type', 'like', '%' . request('search') . '%');
+                });
+        }
+        if ($filters['user_id'] ?? false) {
+            $query->where('user_id', request('user_id'));
         }
     }
 }
