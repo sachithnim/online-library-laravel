@@ -46,7 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function listing()
+    public function bookListing()
     {
         return $this->hasMany(BookListing::class);
     }

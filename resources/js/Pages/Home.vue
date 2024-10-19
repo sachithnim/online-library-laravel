@@ -1,7 +1,21 @@
-<script setup></script>
+<script setup>
+import Card from '../Components/Card.vue'
+
+defineProps({
+    bookListings: Object,
+})
+</script>
 
 <template>
-    <header>
-        <p>This is a simple starter kit for Laravel 11, Inertia JS, and Vue JS, without authentication. Tailwind and ZiggyVue are installed.</p>
-    </header>
-</template>
+    
+    <Head title="- Latest Books Listings" />
+  
+    <div v-if="Object.keys(bookListings.data).length">
+      <div class="grid grid-cols-3 gap-4">
+        <div v-for="bookListing in bookListings.data" :key="bookListing.id">
+            <Card :bookListing="bookListing" />
+        </div>
+      </div>
+    </div>
+  </template>
+  

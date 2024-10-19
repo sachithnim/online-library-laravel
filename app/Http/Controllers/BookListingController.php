@@ -14,7 +14,12 @@ class BookListingController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Home');
+
+        $bookListings = BookListing::with('user')->latest()->paginate(6);
+
+        return Inertia::render('Home', [
+            'bookListings' => $bookListings
+        ]);
     }
 
     /**
