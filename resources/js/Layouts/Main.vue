@@ -3,6 +3,7 @@ import NavLink from '@/Components/NavLink.vue';
 import { usePage } from '@inertiajs/vue3';	
 import { computed } from 'vue';
 import { ref } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 const page = usePage();
 const user = computed(() => page.props.auth.user);
@@ -48,6 +49,7 @@ const show = ref(false);
                         
                         <Link :href="route('profile.edit')" class="block w-full px-6 py-3 hover:bg-slate-700 text-left">Profile</Link>
                         <Link :href="route('dashboard')" class="block w-full px-6 py-3 hover:bg-slate-700 text-left">Dashboard</Link>
+                        <Link :href="route('mybooks')" class="block w-full px-6 py-3 hover:bg-slate-700 text-left">My Books</Link>
                         <Link :href="route('logout')" method="post" as="button" class="block w-full px-6 py-3 hover:bg-slate-700 text-left">Logout</Link>
                     </div>
 

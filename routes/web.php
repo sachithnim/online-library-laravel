@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookListingController;
+use App\Http\Controllers\MyBooksController;
 use App\Models\BookListing;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -11,6 +12,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::middleware('auth')->group(function() {
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
+
+    Route::get('/mybooks', [MyBooksController::class, 'book'])->middleware('verified')->name('mybooks');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
@@ -20,10 +23,11 @@ Route::middleware('auth')->group(function() {
 
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::post('/borrow/book', [MyBooksController::class, 'borrowBook'])->name('borrow.book');
+
+
 });
 
-
 Route::get('/', [BookListingController::class, 'index'])->name('home');
-Route::resource('bookListing', BookListingController::class);
 
 require __DIR__.'/auth.php';
