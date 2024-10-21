@@ -44,7 +44,7 @@ const submit = () => {
                         <InputField label="Name" icon="id-badge" v-model="form.name"/>
                         <InputField label="Email" type="email" icon="at" v-model="form.email"/>
                         <InputField label="Password" type="password" icon="key" v-model="form.password"/>
-                        <InputField label="Confirm Email" type="password" icon="key" v-model="form.password_confirmation"/>
+                        <InputField label="Confirm password" type="password" icon="key" v-model="form.password_confirmation"/>
 
                         <p class="text-slate-500 text-sm dark:text-slate-400">
                                 By creating an account, you agree to our Terms of 

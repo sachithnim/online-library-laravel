@@ -16,42 +16,48 @@ const form = useForm({
 });
 
 const search = () => {
-    router.get(route("home"), { search: form.search, user_id: params.user_id, type: params.type, });
+    router.get(route("home"), { 
+        search: form.search, 
+        user_id: params.user_id, 
+        type: params.type 
+    });
 };
-
 </script>
 
 <template>
-    
     <Head title="- Latest Books Listings" />
 
-    <div class="flex items-center justify-between mb-4">
-        <div>filters</div>
+    <!-- Main Container with Padding for Side Gaps -->
+    <div class="container mx-auto px-8 md:px-16"> 
+        <div class="flex items-center justify-between mb-4">
+            <div>filters</div>
 
-        <div class="w-1/4">
-            <form @submit.prevent="search">
-                <InputField
-                    type="search"
-                    label=""
-                    icon="magnifying-glass"
-                    placeholder="Search..."
-                    v-model="form.search"
-                />
-            </form>
+            <div class="w-1/4">
+                <form @submit.prevent="search">
+                    <InputField
+                        type="search"
+                        label=""
+                        icon="magnifying-glass"
+                        placeholder="Search..."
+                        v-model="form.search"
+                    />
+                </form>
+            </div>
         </div>
-    </div>
 
-  
-    <div v-if="Object.keys(bookListings.data).length">
-      <div class="grid grid-cols-3 gap-4">
-        <div v-for="bookListing in bookListings.data" :key="bookListing.id">
-            <Card :bookListing="bookListing" />
+        <div v-if="Object.keys(bookListings.data).length">
+            <!-- Adjusted Grid with Responsive Columns and Gap -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"> 
+                <div v-for="bookListing in bookListings.data" :key="bookListing.id">
+                    <Card :bookListing="bookListing" />
+                </div>
+            </div>
+            
+            <!-- Pagination Links -->
+            <div class="mt-8">
+                <PaginationLinks :paginator="bookListings" />
+            </div>
         </div>
-      </div>
-      <div class="mt-8">
-        <PaginationLinks :paginator="bookListings" />
-      </div>
+        <div v-else>There are no books</div>
     </div>
-    <div v-else>There are no books</div>
-  </template>
-  
+</template>
