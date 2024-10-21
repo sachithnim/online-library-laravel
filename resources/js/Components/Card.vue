@@ -60,7 +60,7 @@ const borrowBook = (id) => {
 
                 <!-- Description -->
                 <h3 class="text-lg mb-2 text-gray-700 dark:text-gray-300">
-                    {{ bookListing.description.substring(0, 40) }}...
+                    {{ bookListing.description.substring(0, 300) }}...
                 </h3>
                 
                 <!-- Genre/Type with button -->

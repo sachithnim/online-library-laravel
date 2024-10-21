@@ -49,4 +49,18 @@ class MyBooksController extends Controller
     return back()->with('success', 'You have successfully borrowed the book.');
 }
 
+public function removeBorrowedBook($id)
+    {
+        // Find the borrowed book by ID and ensure it belongs to the authenticated user
+        $borrowedBook = BorrowedBook::where('id', $id)
+                                    ->where('user_id', Auth::id())
+                                    ->firstOrFail();
+
+        // Delete the borrowed book record
+        $borrowedBook->delete();
+
+        // Return success message or redirect
+        return back()->with('success', 'The book has been removed from your borrowed list.');
+    }
+
 }

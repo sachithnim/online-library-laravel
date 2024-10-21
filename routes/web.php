@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function() {
 
     Route::post('/borrow/book', [MyBooksController::class, 'borrowBook'])->name('borrow.book');
 
+    Route::delete('/borrowed-books/{id}', [MyBooksController::class, 'removeBorrowedBook'])->name('borrowedBooks.remove');
 
 });
 
