@@ -61,10 +61,9 @@ const selectType = (type) => {
             {{ toastMessage }}
         </div>
 
-        <!-- Card with consistent layout -->
+        <!-- Card with uniform color -->
         <div class="bg-blue-50 dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden h-full flex flex-col justify-between transition-transform hover:scale-105 hover:shadow-2xl min-h-[400px] flex-grow">
-            <div class="p-4 text-gray-900 dark:text-white flex flex-col h-full">
-                
+            <div>
                 <!-- Image -->
                 <!-- <Link href="">
                     <img 
@@ -76,40 +75,43 @@ const selectType = (type) => {
                     />
                 </Link> -->
 
-                <!-- Title -->
-                <h3 class="font-bold text-xl mb-2 text-blue-600 min-h-[50px]">
-                    {{ bookListing.title.substring(0, 40) }}...
-                </h3>
+                <!-- Title & user -->
+                <div class="p-4 text-gray-900 dark:text-white">
+                    <!-- Title -->
+                    <h3 class="font-bold text-xl mb-2 text-blue-600">
+                        {{ bookListing.title.substring(0, 40) }}...
+                    </h3>
 
-                <!-- User Info (commented) -->
-                <!-- <p class="text-gray-600 dark:text-gray-400">Listed on {{ new Date(bookListing.created_at).toLocaleDateString() }} by
-                    <button class="text-blue-500 hover:underline" @click="selectUser(bookListing.user.id)">
-                        {{ bookListing.user.name }}
+                    <!-- User Info (commented) -->
+                    <!-- <p class="text-gray-600 dark:text-gray-400">Listed on {{ new Date(bookListing.created_at).toLocaleDateString() }} by
+                        <button class="text-blue-500 hover:underline" @click="selectUser(bookListing.user.id)">
+                            {{ bookListing.user.name }}
+                        </button>
+                    </p> -->
+
+                    <!-- Description -->
+                    <h3 class="text-lg mb-2 text-gray-700 dark:text-gray-300">
+                        {{ bookListing.description.substring(0, 300) }}...
+                    </h3>
+
+                    <!-- Genre/Type with button -->
+                    <p class="text-sm font-semibold text-gray-500 dark:text-gray-400">
+                        Genre / type: 
+                        <button class="text-blue-500 hover:underline" @click="selectType(bookListing.type)">
+                            {{ bookListing.type }}
+                        </button>
+                    </p>
+
+                    <!-- Price -->
+                    <p class="text-lg font-bold text-green-600 mt-2">Rs. {{ bookListing.price }}</p>
+
+                    <!-- Borrow Button -->
+                    <button 
+                        class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+                        @click="borrowBook(bookListing.id)">
+                        Borrow
                     </button>
-                </p> -->
-
-                <!-- Description -->
-                <h3 class="text-lg mb-2 text-gray-700 dark:text-gray-300 min-h-[100px]">
-                    {{ bookListing.description.substring(0, 100) }}...
-                </h3>
-
-                <!-- Genre/Type with button -->
-                <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 min-h-[30px]">
-                    Genre / type: 
-                    <button class="text-blue-500 hover:underline" @click="selectType(bookListing.type)">
-                        {{ bookListing.type }}
-                    </button>
-                </p>
-
-                <!-- Price -->
-                <p class="text-lg font-bold text-green-600 mt-auto mb-4">Rs. {{ bookListing.price }}</p>
-
-                <!-- Borrow Button -->
-                <button 
-                    class="bg-blue-600 text-white px-4 py-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
-                    @click="borrowBook(bookListing.id)">
-                    Borrow
-                </button>
+                </div>
             </div>
         </div>
     </div>
